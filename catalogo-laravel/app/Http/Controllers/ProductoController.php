@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Productos;
+use App\Models\Categorias;
 
 class ProductoController extends Controller
 {
@@ -41,6 +42,12 @@ class ProductoController extends Controller
             //retornamos el producto con las categorias
             return response()-> json($producto->load('categorias'), 201);
         });
+    }
+
+    public function categorias()
+    {
+        $categorias = Categorias::all();
+        return response()->json($categorias);
     }
 
     /**

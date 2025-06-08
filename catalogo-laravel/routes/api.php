@@ -12,6 +12,7 @@ Route::post('/login', [AuthController::class, 'login']);
 //productos
 Route::get('/productos', [ProductoController::class, 'index']);
 Route::get('/productos/{id}', [ProductoController::class, 'show']);
+Route::get('/categorias', [ProductoController::class, 'categorias']);
 
 //rutas protegidas
 Route::middleware('auth:sanctum')->group(function () {
