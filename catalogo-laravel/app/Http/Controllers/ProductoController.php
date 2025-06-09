@@ -83,7 +83,7 @@ class ProductoController extends Controller
             }
         });
         //retornamos el producto con las categorias
-        return response()->json($producto->load('categorias'), 200);
+        return response()->json($producto, 200);
     }
 
     /**
