@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Productos;
@@ -96,5 +96,24 @@ class ProductoController extends Controller
         $producto->delete(); // Eliminar el producto
 
         return response()->json(['message' => 'Producto eliminado correctamente'], 200);
+    }
+
+    public function storeCategoria(Request $request)
+   {
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            // El slug puede ser opcional en el request
+            'slug' => 'nullable|string|max:255|unique:categorias,slug',
+        ]);
+
+        // Si no envían slug, lo generamos a partir del nombre
+        $slug = $validated['slug'] ?? Str::slug($validated['nombre']);
+
+        $categoria = \App\Models\Categorias::create([
+            'nombre' => $validated['nombre'],
+            'slug' => $slug,
+        ]);
+
+        return response()->json($categoria, 201);
     }
 }
