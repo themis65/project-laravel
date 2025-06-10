@@ -17,6 +17,7 @@ Route::get('/categorias', [ProductoController::class, 'categorias']);
 //rutas protegidas
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/categorias', [ProductoController::class, 'storeCategoria'])->middleware('IsAdmin:admin');
+    Route::delete('/categorias/{id}', [ProductoController::class, 'destroyCategoria'])->middleware('IsAdmin:admin');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/productos', [ProductoController::class, 'store'])->middleware('IsAdmin:admin');
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->middleware('IsAdmin:admin');

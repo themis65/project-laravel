@@ -116,4 +116,13 @@ class ProductoController extends Controller
 
         return response()->json($categoria, 201);
     }
+    
+    public function destroyCategoria($id)
+    {
+        $categoria = \App\Models\Categorias::findOrFail($id);
+        $categoria->delete();
+
+        return response()->json(['message' => 'Categoría eliminada correctamente'], 200);
+    }
+
 }
