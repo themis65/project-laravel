@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/carrito', [CarritoController::class, 'store'])->middleware('IsAdmin:cliente');
     Route::get('/carrito', [CarritoController::class, 'index']);
     Route::put('/carrito/{id}', [CarritoController::class, 'update'])->middleware('IsAdmin:cliente');
-    Route::delete('/carrito/{id}', [CarritoController::class, 'destroy'])->middleware('IsAdmin:admin');
+    Route::delete('/carrito/{id}', [CarritoController::class, 'destroy']);
 
     Route::post('/pedidos', [PedidoController::class, 'store'])->middleware('IsAdmin:cliente');
     Route::get('/pedidos', [PedidoController::class, 'index']);
