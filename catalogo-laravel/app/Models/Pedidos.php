@@ -22,4 +22,10 @@ class Pedidos extends Model
     {
         return $this->belongsTo(Direcciones::class);
     }
+    public function productos()
+    {
+        return $this->belongsToMany(Productos::class, 'pedidos_productos', 'pedido_id', 'producto_id')
+            ->withPivot('cantidad', 'precio_unitario', 'subtotal')
+            ->withTimestamps();
+    }
 }

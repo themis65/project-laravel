@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DireccionController;
+use App\Http\Controllers\PedidoController;
 
 //rutas publicas
 Route::post('/register', [AuthController::class, 'register']);
@@ -34,11 +35,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/carrito', [AuthController::class, 'carrito']);
     Route::delete('/carrito/{id}', [AuthController::class, 'destroyCarrito']);
 
-    Route::post('/pedidos', [AuthController::class, 'storepedido']);
-    Route::get('/pedidos', [AuthController::class, 'pedidos']);
-    Route::get('/pedidos/{id}', [AuthController::class, 'showPedido']);
-    Route::put('/pedidos/{id}', [AuthController::class, 'updatePedido']);
-    Route::delete('/pedidos/{id}', [AuthController::class, 'destroyPedido']);
+    Route::post('/pedidos', [PedidoController::class, 'store'])->middleware('IsAdmin:cliente');
+    Route::get('/pedidos', [PedidoController::class, 'index']);
+    Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
+    Route::put('/pedidos/{id}', [PedidoController::class, 'update']);
+    Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->middleware('IsAdmin:admin');
 
     Route::get('/usuarios', [AuthController::class, 'usuarios'])->middleware('IsAdmin:admin');
     Route::put('/usuarios/{id}', [AuthController::class, 'updateUsuario'])->middleware('IsAdmin:admin');
