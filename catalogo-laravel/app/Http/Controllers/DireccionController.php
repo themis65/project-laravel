@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Direcciones;
 
-class DireccionesController extends Controller
+class DireccionController extends Controller
 {
     public function index(Request $request)
     {
@@ -19,8 +19,8 @@ class DireccionesController extends Controller
         $validated = $request->validate([
             'direccion' => 'required|string|max:255',
             'ciudad' => 'required|string|max:100',
-            'estado' => 'required|string|max:100',
-            'codigo_postal' => 'required|string|max:20',
+            'provincia' => 'required|string|max:100',
+            'telefono' => 'required|string|max:20',
             // Agrega más campos según tu modelo
         ]);
 
@@ -39,8 +39,8 @@ class DireccionesController extends Controller
         $validated = $request->validate([
             'direccion' => 'sometimes|required|string|max:255',
             'ciudad' => 'sometimes|required|string|max:100',
-            'estado' => 'sometimes|required|string|max:100',
-            'codigo_postal' => 'sometimes|required|string|max:20',
+            'provincia' => 'sometimes|required|string|max:100',
+            'telefono' => 'sometimes|required|string|max:20',
             // Agrega más campos según tu modelo
         ]);
 

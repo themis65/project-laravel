@@ -25,10 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->middleware('IsAdmin:admin');
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->middleware('IsAdmin:admin');
 
-    Route::get('/direcciones', [DireccionController::class, 'direcciones'])->middleware('IsAdmin:cliente');
-    Route::post('/direcciones', [DireccionController::class, 'storeDireccion'])->middleware('IsAdmin:cliente');
-    Route::put('/direcciones/{id}', [DireccionController::class, 'updateDireccion'])->middleware('IsAdmin:cliente');
-    Route::delete('/direcciones/{id}', [DireccionController::class, 'destroyDireccion'])->middleware('IsAdmin:cliente');
+    Route::get('/direcciones', [DireccionController::class, 'index'])->middleware('IsAdmin:cliente');
+    Route::post('/direcciones', [DireccionController::class, 'store'])->middleware('IsAdmin:cliente');
+    Route::put('/direcciones/{id}', [DireccionController::class, 'update'])->middleware('IsAdmin:cliente');
+    Route::delete('/direcciones/{id}', [DireccionController::class, 'destroy'])->middleware('IsAdmin:cliente');
 
     Route::post('/carrito', [AuthController::class, 'storeCarrito']);
     Route::get('/carrito', [AuthController::class, 'carrito']);
