@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Direcciones;
+use App\Models\Productos;
 
 class Pedidos extends Model
 {

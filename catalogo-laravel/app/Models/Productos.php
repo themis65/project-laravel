@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categorias;
+use App\Models\Carritos;
+use App\Models\CarritoProducto;
+use App\Models\PedidosProductos;
 
 class Productos extends Model
 {
@@ -28,6 +32,12 @@ class Productos extends Model
 
     public function pedidosProductos()
     {
-        return $this->belongsToMany(PedidosProductos::class);
+        return $this->hasMany(PedidosProductos::class, 'producto_id');
+    }
+    public function carritos()
+    {
+        return $this->belongsToMany(Carritos::class, 'carrito_producto', 'producto_id', 'carrito_id')
+            ->withPivot('cantidad')
+            ->withTimestamps();
     }
 }

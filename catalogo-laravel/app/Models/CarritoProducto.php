@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Carritos;
+use App\Models\Productos;
 
 class CarritoProducto extends Model
 {
+    protected $table = 'carrito_producto';
     protected $fillable = [
         'carrito_id',
         'producto_id',

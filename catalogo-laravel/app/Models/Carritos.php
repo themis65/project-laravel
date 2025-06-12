@@ -3,22 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Productos;
 
 class Carritos extends Model
 {
-    protected $fillable = [
-        'user_id',
-        'producto_id',
-        'cantidad',
-    ];
+    protected $fillable = ['user_id', 'estado'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function producto()
+    public function productos()
     {
-        return $this->belongsTo(Productos::class);
+        return $this->belongsToMany(Productos::class, 'carrito_producto', 'carrito_id', 'producto_id')
+            ->withPivot('cantidad')
+            ->withTimestamps();
     }
 }

@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Pedidos;
+use App\Models\Productos;
 class PedidosProductos extends Model
 {
     protected $fillable = [
@@ -13,12 +14,14 @@ class PedidosProductos extends Model
         'precio',
     ];
 
-    public function pedido()
+    public function pedidos()
     {
-        return $this->belongsTo(Pedidos::class);
-    }
+        return $this->belongsToMany(Pedidos::class, 'pedidos_productos', 'producto_id', 'pedido_id')
+            ->withPivot('cantidad', 'precio_unitario', 'subtotal')
+            ->withTimestamps();
+    }   
 
-    public function producto()
+    public function productos()
     {
         return $this->belongsTo(Productos::class);
     }

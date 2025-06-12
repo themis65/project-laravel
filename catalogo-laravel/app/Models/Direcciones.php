@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
+use App\Models\Pedidos;
 class Direcciones extends Model
 {
     protected $table = 'direcciones';

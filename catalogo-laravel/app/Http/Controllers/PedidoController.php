@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedidos;
+use App\Models\Carritos;
 
 class PedidoController extends Controller
 {
@@ -13,7 +14,6 @@ class PedidoController extends Controller
         $validated = $request->validate([
         'direccion_id' => 'required|exists:direcciones,id',
         'total' => 'required|numeric|min:0',
-        'estado' => 'required|string|max:50',
         'productos' => 'required|array|min:1',
         'productos.*.producto_id' => 'required|exists:productos,id',
         'productos.*.cantidad' => 'required|integer|min:1',
@@ -24,7 +24,7 @@ class PedidoController extends Controller
             'user_id' => $request->user()->id,
             'direccion_id' => $validated['direccion_id'],
             'total' => $validated['total'],
-            'estado' => $validated['estado'],
+            'estado' => 'pendiente', // Estado inicial del pedido
         ]);
 
         // Asociar productos al pedido
@@ -38,6 +38,14 @@ class PedidoController extends Controller
             ];
         }
         $pedido->productos()->sync($productosSync);
+
+        $carrito = Carritos::where('user_id', $request->user()->id)
+            ->where('estado', 'activo')
+            ->first();
+        if ($carrito) {
+            $carrito->estado = 'completado';
+            $carrito->save();
+        }
 
         return response()->json($pedido->load('productos'), 201);
     }

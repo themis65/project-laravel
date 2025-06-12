@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Productos;
 class Categorias extends Model
 {
     protected $fillable = [
