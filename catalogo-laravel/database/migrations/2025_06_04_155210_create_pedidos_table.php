@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('total', 10, 2);
             $table->string('estado')->default('pendiente'); // pendiente, completado, cancelado
             $table->dateTime('fecha_pedido')->useCurrent();
-            $table->timestamps();
+            $table->dateTime('created_at', 6)->nullable(); // Cambia aquí
+            $table->dateTime('updated_at', 6)->nullable(); // Cambia aquí
         });
     }
 

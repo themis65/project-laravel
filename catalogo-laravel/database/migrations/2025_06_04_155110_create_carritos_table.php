@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->unique()->onDelete('cascade');
             $table->string('estado')->default('activo'); // activo, pendiente, completado, cancelado
-            $table->timestamps();
+            $table->dateTime('created_at', 6)->nullable(); // Cambia aquí
+            $table->dateTime('updated_at', 6)->nullable(); // Cambia aquí
         });
     }
 

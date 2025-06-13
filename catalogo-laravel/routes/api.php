@@ -40,7 +40,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pedidos', [PedidoController::class, 'store'])->middleware('IsAdmin:cliente');
     Route::get('/pedidos', [PedidoController::class, 'index']);
     Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
-    Route::put('/pedidos/{id}', [PedidoController::class, 'update']);
+    Route::put('/pedidos/direccion/{id}', [PedidoController::class, 'updateC'])->middleware('IsAdmin:cliente');
+
+    Route::get('/pedidos/admin', [PedidoController::class, 'indexAdmin'])->middleware('IsAdmin:admin');
+    Route::put('/pedidos/estado/{id}', [PedidoController::class, 'updateA'])->middleware('IsAdmin:admin');
     Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->middleware('IsAdmin:admin');
 
     Route::get('/usuarios', [AuthController::class, 'usuarios'])->middleware('IsAdmin:admin');

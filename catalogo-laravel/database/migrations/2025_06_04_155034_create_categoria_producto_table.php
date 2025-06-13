@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
             $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
-            $table->timestamps();
+            $table->dateTime('created_at', 6)->nullable(); // Cambia aquí
+            $table->dateTime('updated_at', 6)->nullable(); // Cambia aquí
         });
     }
 

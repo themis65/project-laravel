@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('ciudad');
             $table->string('provincia');
             $table->string('telefono');
-            $table->timestamps();
+            $table->dateTime('created_at', 6)->nullable(); // Cambia aquí
+            $table->dateTime('updated_at', 6)->nullable(); // Cambia aquí
         });
     }
 

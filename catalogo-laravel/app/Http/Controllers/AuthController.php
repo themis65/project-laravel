@@ -20,7 +20,7 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'rol' => 'user', // Default role
+            'rol' => 'cliente', // Default role
         ]);
         return response()->json($user, 201);
     }

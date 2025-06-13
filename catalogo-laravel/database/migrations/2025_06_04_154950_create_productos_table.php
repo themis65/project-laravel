@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('precio', 10, 2);
             $table->string('imagen')->nullable();
             $table->integer('stock')->default(0);
-            $table->timestamps();
+            $table->dateTime('created_at', 6)->nullable(); // Cambia aquí
+            $table->dateTime('updated_at', 6)->nullable(); // Cambia aquí
         });
     }
 

@@ -18,7 +18,7 @@ class Pedidos extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'direccion_id');
     }
 
     public function direccion()
