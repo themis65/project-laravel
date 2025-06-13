@@ -40,6 +40,13 @@ class PedidoController extends Controller
             ];
         }
         $pedido->productos()->sync($productosSync);
+        foreach ($validated['productos'] as $prod) {
+            $producto = \App\Models\Productos::find($prod['producto_id']);
+            if ($producto) {
+                $producto->stock -= $prod['cantidad'];
+                $producto->save();
+            }
+        }
 
         $carrito = Carritos::where('user_id', $request->user()->id)
             ->where('estado', 'activo')
@@ -61,10 +68,12 @@ class PedidoController extends Controller
         return response()->json($pedidos, 200);
     }
 
-    public function indexAdmin()
+    public function indexAdmin(Request $request)
     {
         // Listar todos los pedidos sin filtrar por usuario
-        $pedidos = Pedidos::with('productos', 'direccion')->get();
+        $pedidos = Pedidos::with('productos', 'direccion')
+        ->with('user') // Incluye el usuario que realizó el pedido
+        ->get();
         return response()->json($pedidos, 200);
     }
 
@@ -117,10 +126,7 @@ class PedidoController extends Controller
         // Actualizar solo el campo 'estado'
         $pedido->update(['estado' => $validated['estado']]);
 
-        return response()->json([
-            'message' => 'Estado del pedido actualizado correctamente',
-            'pedido' => $pedido
-        ], 200);
+        return response()->json($pedido, 200);
     }
 
 
