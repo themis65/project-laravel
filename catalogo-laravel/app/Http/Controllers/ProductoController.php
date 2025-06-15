@@ -59,9 +59,7 @@ class ProductoController extends Controller
         return response()->json($producto, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $producto = Productos::findOrFail($id);
